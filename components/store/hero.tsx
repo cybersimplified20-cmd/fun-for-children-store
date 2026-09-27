@@ -42,7 +42,7 @@ export function Hero() {
 
         <div className="relative aspect-[16/9] w-full max-w-xl flex-1 overflow-hidden rounded-3xl border-4 border-card shadow-xl lg:max-w-none">
           <Image
-            src="/images/hero-coloring.png"
+            src="/images/hero-coloring.webp"
             alt="Printed kids coloring pages of dinosaurs, unicorns and rockets with crayons on a table"
             fill
             priority
