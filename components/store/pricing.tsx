@@ -72,6 +72,15 @@ export function Pricing() {
 
         <div className="grid gap-6 md:grid-cols-2">
           <PlanCard
+            product={PRODUCTS.mega}
+            featured
+            showSavings
+            ctaLabel={`Get the Mega Bundle – ${formatPrice(PRODUCTS.mega.priceInCents)}`}
+            loading={pendingProductId === 'mega' && !upsellOpen}
+            disabled={busy}
+            onClick={() => handleSelect('mega')}
+          />
+          <PlanCard
             product={PRODUCTS.starter}
             ctaLabel={`Get ${PRODUCTS.starter.pageCount} Pages – ${formatPrice(PRODUCTS.starter.priceInCents)}`}
             loading={pendingProductId === 'starter' && !upsellOpen}
@@ -80,15 +89,6 @@ export function Pricing() {
               reset()
               setUpsellOpen(true)
             }}
-          />
-          <PlanCard
-            product={PRODUCTS.mega}
-            featured
-            showSavings
-            ctaLabel={`Get the Mega Bundle – ${formatPrice(PRODUCTS.mega.priceInCents)}`}
-            loading={pendingProductId === 'mega' && !upsellOpen}
-            disabled={busy}
-            onClick={() => handleSelect('mega')}
           />
         </div>
 
