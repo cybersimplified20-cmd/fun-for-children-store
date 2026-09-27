@@ -63,7 +63,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="relative aspect-[16/9] w-full max-w-xl flex-1 overflow-hidden rounded-3xl border-4 border-card shadow-xl lg:max-w-none">
+        <div className="relative aspect-[16/9] w-full max-w-xl flex-1 overflow-hidden rounded-3xl border-4 border-card shadow-xl lg:max-w-none" role="region" aria-label="Coloring page examples" aria-roledescription="carousel">
           {heroImages.map((image, index) => (
             <Image
               key={image.src}
@@ -73,7 +73,8 @@ export function Hero() {
               priority={index === 0}
               loading={index === 0 ? 'eager' : 'lazy'}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className={`object-cover transition-opacity duration-700 ${
+              aria-hidden={index !== activeImage}
+              className={`object-cover transition-opacity duration-700 motion-reduce:transition-none ${
                 index === activeImage ? 'opacity-100' : 'pointer-events-none opacity-0'
               }`}
             />
@@ -82,7 +83,7 @@ export function Hero() {
             type="button"
             onClick={previousImage}
             aria-label="Previous image"
-            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/95 p-3 shadow-md backdrop-blur-sm transition hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ChevronLeft className="size-5" aria-hidden="true" />
           </button>
@@ -90,7 +91,7 @@ export function Hero() {
             type="button"
             onClick={nextImage}
             aria-label="Next image"
-            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/95 p-3 shadow-md backdrop-blur-sm transition hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ChevronRight className="size-5" aria-hidden="true" />
           </button>
@@ -102,8 +103,8 @@ export function Hero() {
                 onClick={() => setActiveImage(index)}
                 aria-label={`Show image ${index + 1}`}
                 aria-current={index === activeImage ? 'true' : undefined}
-                className={`size-2.5 rounded-full transition ${
-                  index === activeImage ? 'bg-foreground' : 'bg-foreground/35'
+                className={`size-3 rounded-full border border-background shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  index === activeImage ? 'bg-foreground' : 'bg-foreground/60'
                 }`}
               />
             ))}
