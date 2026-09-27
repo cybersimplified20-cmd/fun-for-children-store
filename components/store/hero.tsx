@@ -120,10 +120,10 @@ export function Hero() {
               />
             ))}
           </div>
-          <p className="pointer-events-none absolute bottom-12 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm backdrop-blur-sm sm:text-sm">
-            ‹ Swipe to preview pages inside the bundle ›
-          </p>
         </div>
+        <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+          ‹ Swipe to preview pages inside the bundle ›
+        </p>
       </div>
     </section>
   )
