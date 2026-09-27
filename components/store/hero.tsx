@@ -36,7 +36,7 @@ export function Hero() {
             Loved by 12,000+ parents and teachers
           </p>
           <h1 className="font-heading text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
-            500+ printable coloring pages kids actually love
+            2,500+ Printable Coloring & Activity Pages for Kids
           </h1>
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
             Dinosaurs, unicorns, rockets and more. Download instantly, print at home, and turn any
@@ -47,7 +47,7 @@ export function Hero() {
               href="#pricing"
               className="inline-flex h-13 w-full items-center justify-center rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:w-auto"
             >
-              Get {PRODUCTS.starter.pageCount} Pages – {formatPrice(PRODUCTS.starter.priceInCents)}
+              Get 2,500+ Pages – {formatPrice(PRODUCTS.mega.priceInCents)}
             </a>
             <SecureBadge />
           </div>
