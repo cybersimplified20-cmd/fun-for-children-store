@@ -91,3 +91,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes review-road {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.5rem)); }
+}
+
+.review-road {
+  animation: review-road 55s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-road {
+    animation-play-state: paused;
+  }
+}
