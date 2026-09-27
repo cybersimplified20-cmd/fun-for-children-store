@@ -16,24 +16,30 @@ export function HeroCarousel() {
   const [carouselReady, setCarouselReady] = useState(false)
 
   useEffect(() => {
-    const activate = () => setCarouselReady(true)
+    let timeoutId: number | undefined
+    let idleId: number | undefined
 
-    if (document.readyState === 'complete') {
-      const id = window.setTimeout(activate, 1500)
-      return () => window.clearTimeout(id)
+    const activate = () => {
+      timeoutId = window.setTimeout(() => setCarouselReady(true), 5000)
     }
 
-    window.addEventListener('load', activate, { once: true })
-    return () => window.removeEventListener('load', activate)
+    if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(activate, { timeout: 3000 })
+    } else {
+      activate()
+    }
+
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId)
+      if (idleId && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId)
+    }
   }, [])
 
   useEffect(() => {
     if (!carouselReady) return
-
     const timer = window.setInterval(() => {
       setActiveImage((current) => (current + 1) % heroImages.length)
     }, 7000)
-
     return () => window.clearInterval(timer)
   }, [carouselReady])
 
@@ -44,28 +50,16 @@ export function HeroCarousel() {
   return (
     <div className="w-full max-w-xl flex-1 lg:max-w-none">
       <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border-4 border-card shadow-xl">
-        {activeImage === 0 ? (
-          <Image
-            src={heroImages[0].src}
-            alt={heroImages[0].alt}
-            fill
-            priority
-            loading="eager"
-            fetchPriority="high"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-        ) : (
-          <Image
-            key={heroImages[activeImage].src}
-            src={heroImages[activeImage].src}
-            alt={heroImages[activeImage].alt}
-            fill
-            loading="lazy"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-        )}
+        <Image
+          src={heroImages[activeImage].src}
+          alt={heroImages[activeImage].alt}
+          fill
+          priority={activeImage === 0}
+          loading={activeImage === 0 ? 'eager' : 'lazy'}
+          fetchPriority={activeImage === 0 ? 'high' : 'auto'}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover"
+        />
 
         {carouselReady && (
           <>
