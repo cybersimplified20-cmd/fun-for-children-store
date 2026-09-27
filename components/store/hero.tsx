@@ -17,20 +17,28 @@ export function Hero() {
   const [activeImage, setActiveImage] = useState(0)
 
   useEffect(() => {
-    // Keep the first hero image stable during initial rendering so the
-    // automatic carousel does not replace the page's LCP candidate.
+    // Keep the LCP image stable through the initial load. Start carousel
+    // autoplay only after the page has loaded and had time to settle.
+    let delay: number | undefined
     let timer: number | undefined
 
     const startAutoplay = () => {
-      timer = window.setInterval(() => {
-        setActiveImage((current) => (current + 1) % heroImages.length)
-      }, 3500)
+      delay = window.setTimeout(() => {
+        timer = window.setInterval(() => {
+          setActiveImage((current) => (current + 1) % heroImages.length)
+        }, 5000)
+      }, 12000)
     }
 
-    const delay = window.setTimeout(startAutoplay, 8000)
+    if (document.readyState === 'complete') {
+      startAutoplay()
+    } else {
+      window.addEventListener('load', startAutoplay, { once: true })
+    }
 
     return () => {
-      window.clearTimeout(delay)
+      window.removeEventListener('load', startAutoplay)
+      if (delay !== undefined) window.clearTimeout(delay)
       if (timer !== undefined) window.clearInterval(timer)
     }
   }, [])
@@ -77,20 +85,17 @@ export function Hero() {
 
         <div className="w-full max-w-xl flex-1 lg:max-w-none">
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border-4 border-card shadow-xl">
-          {heroImages.map((image, index) => (
-            <Image
-              key={image.src}
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority={index === 0}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className={`object-cover transition-opacity duration-700 ${
-                index === activeImage ? 'opacity-100' : 'pointer-events-none opacity-0'
-              }`}
-            />
-          ))}
+          <Image
+            key={heroImages[activeImage].src}
+            src={heroImages[activeImage].src}
+            alt={heroImages[activeImage].alt}
+            fill
+            priority={activeImage === 0}
+            loading={activeImage === 0 ? 'eager' : 'lazy'}
+            fetchPriority={activeImage === 0 ? 'high' : 'auto'}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
           <button
             type="button"
             onClick={previousImage}
