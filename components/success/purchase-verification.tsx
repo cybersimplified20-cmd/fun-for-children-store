@@ -1,9 +1,16 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import { CircleCheck, Clock, Download, Loader2, ShieldAlert } from 'lucide-react'
 import type { VerifyResponse } from '@/app/api/checkout/verify/route'
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
 
 const fetcher = async (url: string): Promise<VerifyResponse> => {
   const response = await fetch(url, { cache: 'no-store' })
@@ -23,6 +30,35 @@ export function PurchaseVerification({ sessionId }: { sessionId: string }) {
         latest?.status === 'pending' ? 3000 : latest?.status === 'paid' ? 10 * 60 * 1000 : 0,
     },
   )
+
+  useEffect(() => {
+    if (data?.status !== 'paid' || !sessionId || typeof window.fbq !== 'function') return
+
+    // The verified Stripe session is the deduplication key, so refreshes do not count a second purchase
+    // in this browser. Meta also receives the session ID as eventID for event-level deduplication.
+    const storageKey = `meta-purchase-${sessionId}`
+    if (window.localStorage.getItem(storageKey)) return
+
+    const values: Record<string, number> = {
+      starter: 7.99,
+      plus: 15.98,
+      mega: 19.99,
+    }
+
+    window.fbq(
+      'track',
+      'Purchase',
+      {
+        value: values[data.product.id] ?? 0,
+        currency: 'EUR',
+        content_ids: [data.product.id],
+        content_name: data.product.name,
+        content_type: 'product',
+      },
+      { eventID: sessionId },
+    )
+    window.localStorage.setItem(storageKey, '1')
+  }, [data, sessionId])
 
   if (!sessionId || data?.status === 'invalid') {
     return (
