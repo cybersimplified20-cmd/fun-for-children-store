@@ -70,7 +70,7 @@ export function Pricing() {
           </div>
         ) : null}
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2" data-pricing-order="mega-first">
           <PlanCard
             product={PRODUCTS.mega}
             featured
