@@ -7,10 +7,10 @@ import { SecureBadge } from '@/components/checkout/secure-badge'
 import { PRODUCTS, formatPrice } from '@/lib/products'
 
 const heroImages = [
-  { src: '/images/hero-coloring.webp', alt: 'Printed kids coloring pages of dinosaurs, unicorns and rockets with crayons on a table' },
-  { src: '/images/hero-carousel-1.webp', alt: 'Printable coloring pages with pets, dinosaurs, rockets and other fun themes' },
-  { src: '/images/hero-carousel-2.webp', alt: 'Printable animal and adventure coloring pages with colorful finished examples' },
-  { src: '/images/hero-carousel-3.webp', alt: 'Printable coloring pages featuring animals, unicorns, vehicles and space themes' },
+  { src: '/images/hero-coloring.webp', alt: 'Animal coloring pages inside the bundle' },
+  { src: '/images/hero-carousel-1.webp', alt: 'Dinosaur coloring pages inside the bundle' },
+  { src: '/images/hero-carousel-2.webp', alt: 'Fairy tale coloring pages inside the bundle' },
+  { src: '/images/hero-carousel-3.webp', alt: 'Space and vehicle coloring pages inside the bundle' },
 ]
 
 export function Hero() {
@@ -120,6 +120,9 @@ export function Hero() {
               />
             ))}
           </div>
+          <p className="pointer-events-none absolute bottom-12 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm backdrop-blur-sm sm:text-sm">
+            ‹ Swipe to preview pages inside the bundle ›
+          </p>
         </div>
       </div>
     </section>
