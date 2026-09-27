@@ -75,7 +75,8 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="relative aspect-[16/9] w-full max-w-xl flex-1 overflow-hidden rounded-3xl border-4 border-card shadow-xl lg:max-w-none">
+        <div className="w-full max-w-xl flex-1 lg:max-w-none">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border-4 border-card shadow-xl">
           {heroImages.map((image, index) => (
             <Image
               key={image.src}
@@ -120,10 +121,11 @@ export function Hero() {
               />
             ))}
           </div>
+          </div>
+          <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+            ‹ Swipe to preview pages inside the bundle ›
+          </p>
         </div>
-        <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
-          ‹ Swipe to preview pages inside the bundle ›
-        </p>
       </div>
     </section>
   )
