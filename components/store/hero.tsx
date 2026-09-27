@@ -17,10 +17,22 @@ export function Hero() {
   const [activeImage, setActiveImage] = useState(0)
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveImage((current) => (current + 1) % heroImages.length)
-    }, 3500)
-    return () => window.clearInterval(timer)
+    // Keep the first hero image stable during initial rendering so the
+    // automatic carousel does not replace the page's LCP candidate.
+    let timer: number | undefined
+
+    const startAutoplay = () => {
+      timer = window.setInterval(() => {
+        setActiveImage((current) => (current + 1) % heroImages.length)
+      }, 3500)
+    }
+
+    const delay = window.setTimeout(startAutoplay, 8000)
+
+    return () => {
+      window.clearTimeout(delay)
+      if (timer !== undefined) window.clearInterval(timer)
+    }
   }, [])
 
   const previousImage = () =>
