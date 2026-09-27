@@ -15,37 +15,43 @@ const heroImages = [
 
 export function Hero() {
   const [activeImage, setActiveImage] = useState(0)
+  const [carouselReady, setCarouselReady] = useState(false)
 
   useEffect(() => {
-    // Keep the LCP image stable through the initial load. Start carousel
-    // autoplay only after the page has loaded and had time to settle.
-    let delay: number | undefined
+    // Keep the first hero image as plain, stable LCP content during initial load.
+    // Enable carousel behaviour only after the page has fully loaded and settled.
+    let readyDelay: number | undefined
+    let autoplayDelay: number | undefined
     let timer: number | undefined
 
-    const startAutoplay = () => {
-      delay = window.setTimeout(() => {
-        timer = window.setInterval(() => {
-          setActiveImage((current) => (current + 1) % heroImages.length)
+    const startCarousel = () => {
+      readyDelay = window.setTimeout(() => {
+        setCarouselReady(true)
+        autoplayDelay = window.setTimeout(() => {
+          timer = window.setInterval(() => {
+            setActiveImage((current) => (current + 1) % heroImages.length)
+          }, 5000)
         }, 5000)
-      }, 12000)
+      }, 7000)
     }
 
-    if (document.readyState === 'complete') {
-      startAutoplay()
-    } else {
-      window.addEventListener('load', startAutoplay, { once: true })
-    }
+    if (document.readyState === 'complete') startCarousel()
+    else window.addEventListener('load', startCarousel, { once: true })
 
     return () => {
-      window.removeEventListener('load', startAutoplay)
-      if (delay !== undefined) window.clearTimeout(delay)
+      window.removeEventListener('load', startCarousel)
+      if (readyDelay !== undefined) window.clearTimeout(readyDelay)
+      if (autoplayDelay !== undefined) window.clearTimeout(autoplayDelay)
       if (timer !== undefined) window.clearInterval(timer)
     }
   }, [])
 
-  const previousImage = () =>
-    setActiveImage((current) => (current - 1 + heroImages.length) % heroImages.length)
-  const nextImage = () => setActiveImage((current) => (current + 1) % heroImages.length)
+  const showImage = (index: number) => {
+    setCarouselReady(true)
+    setActiveImage(index)
+  }
+  const previousImage = () => showImage((activeImage - 1 + heroImages.length) % heroImages.length)
+  const nextImage = () => showImage((activeImage + 1) % heroImages.length)
 
   return (
     <section className="px-4 pb-12 pt-10 sm:pb-20 sm:pt-16">
@@ -85,47 +91,59 @@ export function Hero() {
 
         <div className="w-full max-w-xl flex-1 lg:max-w-none">
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border-4 border-card shadow-xl">
-          <Image
-            key={heroImages[activeImage].src}
-            src={heroImages[activeImage].src}
-            alt={heroImages[activeImage].alt}
-            fill
-            priority={activeImage === 0}
-            loading={activeImage === 0 ? 'eager' : 'lazy'}
-            fetchPriority={activeImage === 0 ? 'high' : 'auto'}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <button
-            type="button"
-            onClick={previousImage}
-            aria-label="Previous image"
-            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
-          >
-            <ChevronLeft className="size-5" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={nextImage}
-            aria-label="Next image"
-            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
-          >
-            <ChevronRight className="size-5" aria-hidden="true" />
-          </button>
-          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-background/70 px-3 py-2 backdrop-blur-sm">
-            {heroImages.map((image, index) => (
-              <button
-                key={image.src}
-                type="button"
-                onClick={() => setActiveImage(index)}
-                aria-label={`Show image ${index + 1}`}
-                aria-current={index === activeImage ? 'true' : undefined}
-                className={`size-2.5 rounded-full transition ${
-                  index === activeImage ? 'bg-foreground' : 'bg-foreground/35'
-                }`}
+            {!carouselReady ? (
+              <Image
+                src={heroImages[0].src}
+                alt={heroImages[0].alt}
+                fill
+                priority
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
-            ))}
-          </div>
+            ) : (
+              <Image
+                key={heroImages[activeImage].src}
+                src={heroImages[activeImage].src}
+                alt={heroImages[activeImage].alt}
+                fill
+                loading={activeImage === 0 ? 'eager' : 'lazy'}
+                fetchPriority={activeImage === 0 ? 'high' : 'auto'}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            )}
+            <button
+              type="button"
+              onClick={previousImage}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+            >
+              <ChevronLeft className="size-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={nextImage}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+            >
+              <ChevronRight className="size-5" aria-hidden="true" />
+            </button>
+            <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-background/70 px-3 py-2 backdrop-blur-sm">
+              {heroImages.map((image, index) => (
+                <button
+                  key={image.src}
+                  type="button"
+                  onClick={() => showImage(index)}
+                  aria-label={`Show image ${index + 1}`}
+                  aria-current={index === activeImage ? 'true' : undefined}
+                  className={`size-2.5 rounded-full transition ${
+                    index === activeImage ? 'bg-foreground' : 'bg-foreground/35'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
             ‹ Swipe to preview pages inside the bundle ›
