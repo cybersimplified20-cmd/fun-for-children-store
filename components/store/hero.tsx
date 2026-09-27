@@ -1,9 +1,32 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Download, Printer, Star } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Download, Printer, Star } from 'lucide-react'
 import { SecureBadge } from '@/components/checkout/secure-badge'
 import { PRODUCTS, formatPrice } from '@/lib/products'
 
+const heroImages = [
+  { src: '/images/hero-coloring.webp', alt: 'Printed kids coloring pages of dinosaurs, unicorns and rockets with crayons on a table' },
+  { src: '/images/hero-carousel-1.webp', alt: 'Printable coloring pages with pets, dinosaurs, rockets and other fun themes' },
+  { src: '/images/hero-carousel-2.webp', alt: 'Printable animal and adventure coloring pages with colorful finished examples' },
+  { src: '/images/hero-carousel-3.webp', alt: 'Printable coloring pages featuring animals, unicorns, vehicles and space themes' },
+]
+
 export function Hero() {
+  const [activeImage, setActiveImage] = useState(0)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % heroImages.length)
+    }, 3500)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const previousImage = () =>
+    setActiveImage((current) => (current - 1 + heroImages.length) % heroImages.length)
+  const nextImage = () => setActiveImage((current) => (current + 1) % heroImages.length)
+
   return (
     <section className="px-4 pb-12 pt-10 sm:pb-20 sm:pt-16">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 lg:flex-row lg:gap-16">
@@ -41,14 +64,50 @@ export function Hero() {
         </div>
 
         <div className="relative aspect-[16/9] w-full max-w-xl flex-1 overflow-hidden rounded-3xl border-4 border-card shadow-xl lg:max-w-none">
-          <Image
-            src="/images/hero-coloring.webp"
-            alt="Printed kids coloring pages of dinosaurs, unicorns and rockets with crayons on a table"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-          />
+          {heroImages.map((image, index) => (
+            <Image
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              fill
+              priority={index === 0}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className={`object-cover transition-opacity duration-700 ${
+                index === activeImage ? 'opacity-100' : 'pointer-events-none opacity-0'
+              }`}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={previousImage}
+            aria-label="Previous image"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+          >
+            <ChevronLeft className="size-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={nextImage}
+            aria-label="Next image"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm transition hover:bg-background"
+          >
+            <ChevronRight className="size-5" aria-hidden="true" />
+          </button>
+          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-background/70 px-3 py-2 backdrop-blur-sm">
+            {heroImages.map((image, index) => (
+              <button
+                key={image.src}
+                type="button"
+                onClick={() => setActiveImage(index)}
+                aria-label={`Show image ${index + 1}`}
+                aria-current={index === activeImage ? 'true' : undefined}
+                className={`size-2.5 rounded-full transition ${
+                  index === activeImage ? 'bg-foreground' : 'bg-foreground/35'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
