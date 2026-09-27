@@ -51,8 +51,8 @@ export function Hero() {
             2,500+ Printable Coloring & Activity Pages for Kids
           </h1>
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Dinosaurs, unicorns, rockets and more. Download instantly, print at home, and turn any
-            afternoon into a creative one.
+            Animals, dinosaurs, fairy tales, space, vehicles and more. Download instantly and print whenever
+            you need them.
           </p>
           <div className="flex w-full flex-col items-center gap-3 sm:w-auto lg:items-start">
             <a
