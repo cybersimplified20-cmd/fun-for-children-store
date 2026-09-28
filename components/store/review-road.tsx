@@ -73,12 +73,7 @@ function ReviewCard({
             backgroundPosition: avatarPosition,
           }}
         />
-        <div>
-          <p className="text-sm font-bold text-foreground">{name}</p>
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-            Illustrative example
-          </p>
-        </div>
+        <p className="text-sm font-bold text-foreground">{name}</p>
       </div>
       <p className="line-clamp-4 text-sm leading-relaxed text-foreground">“{text}”</p>
     </article>
@@ -91,11 +86,11 @@ export function ReviewRoad() {
   return (
     <section
       className="overflow-hidden border-y border-border/70 bg-background py-7"
-      aria-label="Illustrative family use examples"
+      aria-label="Sample family use scenarios"
     >
       <p className="text-center font-heading text-xl font-semibold">How families can use the bundle</p>
       <p className="mx-auto mb-5 mt-1 max-w-2xl px-4 text-center text-xs text-muted-foreground">
-        Illustrative examples showing common ways parents can use printable activities.
+        Sample scenarios showing common ways parents can use printable activities.
       </p>
       <div className="review-road flex w-max gap-4 px-4 hover:[animation-play-state:paused]">
         {loop.map((review, index) => (
