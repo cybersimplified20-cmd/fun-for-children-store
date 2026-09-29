@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const heroImages = [
-  { src: '/images/hero-coloring.webp', alt: 'Animal coloring pages inside the bundle' },
+  { src: '/images/hero-coloring-optimized.webp', alt: 'Animal coloring pages inside the bundle' },
   { src: '/images/hero-carousel-1.webp', alt: 'Dinosaur coloring pages inside the bundle' },
   { src: '/images/hero-carousel-2.webp', alt: 'Fairy tale coloring pages inside the bundle' },
   { src: '/images/hero-carousel-3.webp', alt: 'Space and vehicle coloring pages inside the bundle' },
@@ -77,7 +77,9 @@ export function HeroCarousel() {
           </>
         )}
       </div>
-      <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">‹ Swipe to preview pages inside the bundle ›</p>
+      <p className="mt-3 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+        ‹ Preview real pages included in the bundle ›
+      </p>
     </div>
   )
 }
