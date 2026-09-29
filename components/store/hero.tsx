@@ -11,7 +11,7 @@ export function Hero() {
         <div className="flex flex-1 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
           <p className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-sm font-bold text-secondary-foreground">
             <Star className="size-4 fill-current" aria-hidden="true" />
-            Loved by parents and teachers
+            2,500+ Printable Pages Loved by Parents & Teachers
           </p>
 
           <h1 className="font-heading text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
