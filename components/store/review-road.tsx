@@ -139,6 +139,7 @@ function FamilyCard({
         />
         <p className="text-sm font-bold text-foreground">{label}</p>
       </div>
+      <div className="mb-2 text-amber-500" aria-hidden="true">★★★★★</div>
       <p className="line-clamp-4 text-sm leading-relaxed text-foreground">{text}</p>
     </article>
   )
