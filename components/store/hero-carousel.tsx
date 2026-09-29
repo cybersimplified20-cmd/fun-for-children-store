@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const heroImages = [
@@ -46,17 +45,21 @@ export function HeroCarousel() {
   const showImage = (index: number) => setActiveImage(index)
   const previousImage = () => showImage((activeImage - 1 + heroImages.length) % heroImages.length)
   const nextImage = () => showImage((activeImage + 1) % heroImages.length)
+  const currentImage = heroImages[activeImage]
 
   return (
     <div className="w-full max-w-xl flex-1 lg:max-w-none">
       <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border-4 border-card shadow-xl">
-        <Image
-          src={heroImages[activeImage].src}
-          alt={heroImages[activeImage].alt}
-          fill
-          preload={activeImage === 0}
-          sizes="(max-width: 1024px) calc(100vw - 2rem), 50vw"
-          className="object-cover"
+        <img
+          key={currentImage.src}
+          src={currentImage.src}
+          alt={currentImage.alt}
+          width="1600"
+          height="900"
+          loading={activeImage === 0 ? 'eager' : 'lazy'}
+          fetchPriority={activeImage === 0 ? 'high' : 'auto'}
+          decoding={activeImage === 0 ? 'sync' : 'async'}
+          className="absolute inset-0 h-full w-full object-cover"
         />
 
         {carouselReady && (
