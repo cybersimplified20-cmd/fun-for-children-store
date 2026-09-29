@@ -1,4 +1,4 @@
-import { Download, Printer, Sparkles } from 'lucide-react'
+import { Download, Printer, Star } from 'lucide-react'
 import { SecureBadge } from '@/components/checkout/secure-badge'
 import { CheckoutButton } from '@/components/checkout/checkout-button'
 import { PRODUCTS, formatPrice } from '@/lib/products'
@@ -10,8 +10,8 @@ export function Hero() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 lg:flex-row lg:gap-16">
         <div className="flex flex-1 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
           <p className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-sm font-bold text-secondary-foreground">
-            <Sparkles className="size-4" aria-hidden="true" />
-            Screen-free activities in minutes
+            <Star className="size-4 fill-current" aria-hidden="true" />
+            For parents and teachers who want quick screen-free activities
           </p>
 
           <h1 className="font-heading text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
