@@ -1,101 +1,62 @@
-const reviews = [
+import { Car, CloudRain, House, Plane, School, Utensils } from 'lucide-react'
+
+const USE_CASES = [
   {
-    name: 'Sarah M.',
-    text: 'Bought this for a long road trip and it was an absolute lifesaver. I printed a selection of pages beforehand and it kept my 5-year-old entertained for hours without a screen!',
-    avatarPosition: '100% 100%',
+    icon: House,
+    title: 'Quiet time at home',
+    text: 'Keep a ready-to-print activity on hand for calm afternoons and creative breaks.',
   },
   {
-    name: 'David L.',
-    text: 'There are so many different pages to choose from. My son loves picking a new coloring page every day, and I love that I can simply print more whenever we need them.',
-    avatarPosition: '50% 0%',
+    icon: CloudRain,
+    title: 'Rainy days',
+    text: 'Pick a new theme and print a few pages when outdoor plans are off the table.',
   },
   {
-    name: 'Emily R.',
-    text: 'A wonderful bundle for creative kids. I printed a few pages for my niece and she immediately wanted to start coloring. There’s enough variety to keep her busy for ages.',
-    avatarPosition: '75% 0%',
+    icon: Car,
+    title: 'Road trips',
+    text: 'Print a small stack before leaving and bring crayons for an easy travel activity.',
   },
   {
-    name: 'Mark Thompson',
-    text: 'Really impressed with how much content is included. There are lots of different themes, so it’s easy to find something my child is interested in.',
-    avatarPosition: '25% 100%',
+    icon: Utensils,
+    title: 'Restaurants & waiting',
+    text: 'Bring a few pages along for moments when kids need something simple to do.',
   },
   {
-    name: 'Jessica K.',
-    text: 'Such an easy way to keep the kids entertained without putting them in front of a screen. Download, print, and they’re ready to start coloring.',
-    avatarPosition: '100% 0%',
+    icon: Plane,
+    title: 'Travel days',
+    text: 'Choose compact activities for flights, hotels and time away from home.',
   },
   {
-    name: 'Rachel B.',
-    text: 'I used these pages as part of my daughter’s birthday activities and the kids loved them. Having so many designs to choose from made it really easy.',
-    avatarPosition: '75% 100%',
-  },
-  {
-    name: 'Michael P.',
-    text: 'My kids genuinely enjoy these. It keeps them busy, encourages creativity, and gives us an easy screen-free activity whenever we need one.',
-    avatarPosition: '50% 100%',
-  },
-  {
-    name: 'Amanda Miller',
-    text: 'Great value for the amount of printable content included. I love being able to choose a few pages, print them at home, and save the rest for another day.',
-    avatarPosition: '0% 0%',
-  },
-  {
-    name: 'Chris H.',
-    text: 'Much more variety than I expected. Animals, fun characters and lots of different designs — my kids are always finding something new they want to color.',
-    avatarPosition: '25% 0%',
-  },
-  {
-    name: 'Laura G.',
-    text: 'My twins each chose their own pages and spent the afternoon coloring together. Having such a big collection means they rarely argue over what to do next!',
-    avatarPosition: '0% 100%',
+    icon: School,
+    title: 'Classroom use',
+    text: 'Print themed pages for quiet activities, early finishers or creative time.',
   },
 ]
 
-function ReviewCard({
-  name,
-  text,
-  avatarPosition,
-}: {
-  name: string
-  text: string
-  avatarPosition: string
-}) {
+export function UseCases() {
   return (
-    <article className="w-[300px] shrink-0 rounded-2xl border border-border bg-card px-5 py-4 shadow-sm sm:w-[360px]">
-      <div className="mb-3 flex items-center gap-3">
-        <div
-          className="h-11 w-11 shrink-0 rounded-full border border-border bg-cover shadow-sm"
-          role="img"
-          aria-label={`${name} profile photo`}
-          style={{
-            backgroundImage: "url('/images/review-avatars.webp')",
-            backgroundSize: '500% 200%',
-            backgroundPosition: avatarPosition,
-          }}
-        />
-        <p className="text-sm font-bold text-foreground">{name}</p>
-      </div>
-      <p className="line-clamp-4 text-sm leading-relaxed text-foreground">“{text}”</p>
-    </article>
-  )
-}
+    <section className="border-y border-border/70 bg-background px-4 py-14 sm:py-18" aria-labelledby="use-cases-title">
+      <div className="mx-auto flex max-w-5xl flex-col gap-8">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">Easy to use anywhere</p>
+          <h2 id="use-cases-title" className="font-heading text-3xl font-semibold text-balance">
+            Made for the moments you need an easy activity
+          </h2>
+        </div>
 
-export function ReviewRoad() {
-  const loop = [...reviews, ...reviews]
-
-  return (
-    <section
-      className="overflow-hidden border-y border-border/70 bg-background py-7"
-      aria-label="Sample family use scenarios"
-    >
-      <p className="text-center font-heading text-xl font-semibold">How families can use the bundle</p>
-      <p className="mx-auto mb-5 mt-1 max-w-2xl px-4 text-center text-xs text-muted-foreground">
-        Sample scenarios showing common ways parents can use printable activities.
-      </p>
-      <div className="review-road flex w-max gap-4 px-4 hover:[animation-play-state:paused]">
-        {loop.map((review, index) => (
-          <ReviewCard key={`${review.name}-${index}`} {...review} />
-        ))}
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {USE_CASES.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="flex gap-4 rounded-2xl border bg-card p-5 shadow-sm">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+                <Icon className="size-5" aria-hidden="true" />
+              </span>
+              <div>
+                <h3 className="font-heading text-lg font-semibold">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
