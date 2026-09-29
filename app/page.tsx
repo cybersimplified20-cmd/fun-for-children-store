@@ -3,7 +3,8 @@ import { Pricing } from '@/components/store/pricing'
 import { Faq, Themes } from '@/components/store/details'
 import { SiteFooter, SiteHeader } from '@/components/store/site-chrome'
 import { CheckoutCancelledNotice } from '@/components/store/checkout-cancelled-notice'
-import { ReviewRoad } from '@/components/store/review-road'
+import { UseCases } from '@/components/store/review-road'
+import { StickyMobileCta } from '@/components/store/sticky-mobile-cta'
 
 export default async function Page({
   searchParams,
@@ -18,12 +19,14 @@ export default async function Page({
       {checkout === 'cancelled' ? <CheckoutCancelledNotice /> : null}
       <main>
         <Hero />
-        <ReviewRoad />
-        <Themes />
         <Pricing />
+        <UseCases />
+        <Themes />
         <Faq />
       </main>
+      <div className="h-20 md:hidden" aria-hidden="true" />
       <SiteFooter />
+      <StickyMobileCta />
     </>
   )
 }
