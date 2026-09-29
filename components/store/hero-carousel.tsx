@@ -54,10 +54,8 @@ export function HeroCarousel() {
           src={heroImages[activeImage].src}
           alt={heroImages[activeImage].alt}
           fill
-          priority={activeImage === 0}
-          loading={activeImage === 0 ? 'eager' : 'lazy'}
-          fetchPriority={activeImage === 0 ? 'high' : 'auto'}
-          sizes="(max-width: 1024px) 100vw, 50vw"
+          preload={activeImage === 0}
+          sizes="(max-width: 1024px) calc(100vw - 2rem), 50vw"
           className="object-cover"
         />
 
