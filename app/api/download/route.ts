@@ -1,24 +1,7 @@
+import { issueSignedToken, presignUrl } from '@vercel/blob'
 import { type NextRequest, NextResponse } from 'next/server'
 import { verifyCheckoutSession } from '@/lib/checkout'
 import { PRODUCT_FILES, readDownloadToken } from '@/lib/downloads'
-
-function getGoogleDriveFileId(rawUrl: string) {
-  let url: URL
-  try {
-    url = new URL(rawUrl)
-  } catch {
-    return null
-  }
-
-  if (url.protocol !== 'https:' || !['drive.google.com', 'docs.google.com'].includes(url.hostname)) {
-    return null
-  }
-
-  const pathMatch = url.pathname.match(/\/file\/d\/([^/]+)/)
-  const fileId = pathMatch?.[1] ?? url.searchParams.get('id')
-
-  return fileId && /^[A-Za-z0-9_-]+$/.test(fileId) ? fileId : null
-}
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token') ?? ''
@@ -40,26 +23,32 @@ export async function GET(request: NextRequest) {
   const file = PRODUCT_FILES[result.product.id].find((item) => item.id === claims.fileId)
   if (!file) return NextResponse.json({ error: 'File not included in this purchase' }, { status: 403 })
 
-  if (!file.driveUrl) {
-    console.error(`Missing Google Drive URL for product ${result.product.id}`)
+  try {
+    // Give the verified buyer temporary GET-only access to exactly one private Blob object.
+    // The large ZIP is served by Blob directly, not streamed through the app Function.
+    const delegationValidUntil = Date.now() + 15 * 60 * 1000
+    const signedUrlValidUntil = Date.now() + 5 * 60 * 1000
+
+    const delegationToken = await issueSignedToken({
+      pathname: file.blobPath,
+      operations: ['get'],
+      validUntil: delegationValidUntil,
+    })
+
+    const { presignedUrl } = await presignUrl(delegationToken, {
+      pathname: file.blobPath,
+      operation: 'get',
+      validUntil: signedUrlValidUntil,
+    })
+
+    const response = NextResponse.redirect(presignedUrl, 307)
+    response.headers.set('Cache-Control', 'private, no-store')
+    return response
+  } catch (error) {
+    console.error('Failed to create private Blob download:', (error as Error).message)
     return NextResponse.json(
-      { error: 'Your files are being configured. Please contact support.' },
+      { error: 'Your download is temporarily unavailable. Please refresh your confirmation page and try again.' },
       { status: 503 },
     )
   }
-
-  const driveFileId = getGoogleDriveFileId(file.driveUrl)
-  if (!driveFileId) {
-    return NextResponse.json({ error: 'Product delivery URL is misconfigured.' }, { status: 500 })
-  }
-
-  // Send the verified buyer straight to Google's download endpoint instead of the Drive preview page.
-  const destination = new URL('https://drive.usercontent.google.com/download')
-  destination.searchParams.set('id', driveFileId)
-  destination.searchParams.set('export', 'download')
-  destination.searchParams.set('confirm', 't')
-
-  const response = NextResponse.redirect(destination, 307)
-  response.headers.set('Cache-Control', 'no-store')
-  return response
 }
