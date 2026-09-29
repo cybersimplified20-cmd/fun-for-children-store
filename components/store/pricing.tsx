@@ -27,7 +27,7 @@ export function Pricing() {
   }
 
   return (
-    <section id="pricing" aria-labelledby="pricing-title" className="scroll-mt-20 px-4 py-16 sm:py-24">
+    <section id="pricing" aria-labelledby="pricing-title" className="scroll-mt-20 px-4 pb-16 pt-6 sm:pb-24 sm:pt-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
         <div className="flex flex-col items-center gap-3 text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Instant download</p>
