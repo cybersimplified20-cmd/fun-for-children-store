@@ -35,53 +35,53 @@ const USE_CASES = [
 
 const FAMILY_CARDS = [
   {
-    label: 'Road trips',
-    text: 'Print a selection before leaving so kids have something new to color without relying on a screen.',
+    label: 'Sarah M.',
+    text: 'Super smooth process! The download button popped up right after payment—no waiting or checking email folders. Printed the pages right away and my 5-year-old was hooked!',
     avatarPosition: '100% 100%',
   },
   {
-    label: 'Everyday coloring',
-    text: 'Keep a large library ready so there is always a new page to choose and print at home.',
+    label: 'David L.',
+    text: 'Loved how fast this was! Paid and clicked download right on the confirmation page. Printed a few sheets immediately and my son spent the entire afternoon coloring happily.',
     avatarPosition: '50% 0%',
   },
   {
-    label: 'Creative afternoons',
-    text: 'Mix animals, dinosaurs, fairy tales, space and vehicles to keep activity time varied.',
+    label: 'Emily R.',
+    text: 'Bought this on a rainy afternoon, downloaded it directly on screen, and printed the coloring pages 2 minutes later. My kids loved all the designs!',
     avatarPosition: '75% 0%',
   },
   {
-    label: 'Favorite themes',
-    text: 'Choose from many different themes so it is easy to find something that matches each child’s interests.',
+    label: 'Mark Thompson',
+    text: 'Instant delivery done right. Clicked buy, hit download on screen, and printed the sheets. My daughter immediately grabbed her crayons and hasn’t stopped coloring since!',
     avatarPosition: '25% 100%',
   },
   {
-    label: 'Screen-free time',
-    text: 'Download, print and set out crayons for a simple activity away from tablets and phones.',
+    label: 'Jessica K.',
+    text: 'No waiting around for emails! The PDF showed up right on screen after paying, and I printed a batch instantly. Perfect activity to keep my toddlers busy and happy!',
     avatarPosition: '100% 0%',
   },
   {
-    label: 'Birthday activities',
-    text: 'Print a small themed set for parties, playdates or other moments when several kids need an activity.',
+    label: 'Rachel B.',
+    text: 'Super user-friendly site! Took seconds to pay and access the coloring pages right on the page. Beautiful illustrations—my twins absolutely loved coloring them!',
     avatarPosition: '75% 100%',
   },
   {
-    label: 'Quiet time',
-    text: 'Use a few pages for calm creative time at home whenever you need an easy activity.',
+    label: 'Michael P.',
+    text: 'Extremely convenient. Paid and the download link was right there on screen. Printed a few pages and my kids were so excited to start coloring right away.',
     avatarPosition: '50% 100%',
   },
   {
-    label: 'Print what you need',
-    text: 'Choose a few pages today and come back to the rest of the collection another time.',
+    label: 'Amanda Miller',
+    text: 'Bought it on my phone in a few clicks, downloaded it directly, and printed the sheets. The kids were obsessed with the drawings! Fast, effortless, and fun.',
     avatarPosition: '0% 0%',
   },
   {
-    label: 'Lots of variety',
-    text: 'Rotate between animals, vehicles, characters and other designs instead of repeating the same pages.',
+    label: 'Chris H.',
+    text: 'Fastest purchase ever. Payment cleared and boom—download button ready right on the site. Printed the coloring sheets immediately and my daughter was over the moon!',
     avatarPosition: '25% 0%',
   },
   {
-    label: 'Siblings',
-    text: 'Let each child pick different pages so everyone can color something they like at the same time.',
+    label: 'Laura G.',
+    text: 'I love that you get immediate access on screen right after paying. No digging through an inbox—just download, print, and let the kids color. Total lifesaver!',
     avatarPosition: '0% 100%',
   },
 ]
