@@ -33,6 +33,21 @@ const USE_CASES = [
   },
 ]
 
+const SCENARIOS = [
+  {
+    label: 'Road-trip example',
+    text: 'I would print a small selection before leaving so there is always something new to color without handing over a screen.',
+  },
+  {
+    label: 'Rainy-day example',
+    text: 'A big printable library makes it easy to choose a few pages in seconds instead of searching for a new activity every time.',
+  },
+  {
+    label: 'Classroom example',
+    text: 'Having lots of themes ready to print can be useful for quiet-time activities, early finishers and creative breaks.',
+  },
+]
+
 export function UseCases() {
   return (
     <section className="border-y border-border/70 bg-background px-4 py-14 sm:py-18" aria-labelledby="use-cases-title">
@@ -57,6 +72,36 @@ export function UseCases() {
             </li>
           ))}
         </ul>
+      </div>
+    </section>
+  )
+}
+
+export function ParentScenarios() {
+  return (
+    <section className="px-4 py-14 sm:py-18" aria-labelledby="scenario-title">
+      <div className="mx-auto flex max-w-5xl flex-col gap-7">
+        <div className="text-center">
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">Parent-style examples</p>
+          <h2 id="scenario-title" className="mt-2 font-heading text-3xl font-semibold text-balance">
+            What using the bundle can look like
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Illustrative scenarios, not customer testimonials.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {SCENARIOS.map((scenario) => (
+            <article key={scenario.label} className="rounded-2xl border bg-card p-5 shadow-sm">
+              <div className="mb-3 text-amber-500" aria-hidden="true">★★★★★</div>
+              <p className="text-sm leading-relaxed text-foreground">“{scenario.text}”</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                {scenario.label}
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
