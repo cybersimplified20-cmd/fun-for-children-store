@@ -5,19 +5,19 @@ import type { ProductId } from '@/lib/products'
 export interface DigitalFile {
   id: string
   label: string
-  /** Google Drive sharing URL. Kept server-side and only returned after Stripe verifies payment. */
+  /** Google Drive sharing URL. Kept server-side and converted to a direct download only after payment verification. */
   driveUrl: string | undefined
 }
 
 const PRODUCT_FILES: Record<ProductId, DigitalFile[]> = {
   starter: [
-    { id: 'starter-pack', label: 'Open Your 500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_STARTER },
+    { id: 'starter-pack', label: 'Download Your 500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_STARTER },
   ],
   plus: [
-    { id: 'plus-pack', label: 'Open Your 1,500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_PLUS },
+    { id: 'plus-pack', label: 'Download Your 1,500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_PLUS },
   ],
   mega: [
-    { id: 'mega-bundle', label: 'Open Your Complete 2,500+ Page Collection', driveUrl: process.env.DRIVE_URL_MEGA },
+    { id: 'mega-bundle', label: 'Download Your Complete 2,500+ Page Collection', driveUrl: process.env.DRIVE_URL_MEGA },
   ],
 }
 
