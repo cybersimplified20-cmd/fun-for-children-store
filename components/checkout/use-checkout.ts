@@ -1,7 +1,13 @@
 'use client'
 
 import { useCallback, useRef, useState } from 'react'
-import type { ProductId } from '@/lib/products'
+import { PRODUCTS, type ProductId } from '@/lib/products'
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
 
 type CheckoutState =
   | { status: 'idle' }
@@ -18,16 +24,35 @@ export function useCheckout() {
     inFlight.current = true
     setState({ status: 'loading', productId })
 
+    const attemptId = crypto.randomUUID()
+
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId, attemptId: crypto.randomUUID() }),
+        body: JSON.stringify({ productId, attemptId }),
       })
       const data = (await response.json().catch(() => ({}))) as { url?: string; error?: string }
 
       if (!response.ok || !data.url) {
         throw new Error(data.error ?? 'We could not start checkout. Please try again.')
+      }
+
+      const product = PRODUCTS[productId]
+      if (typeof window.fbq === 'function') {
+        window.fbq(
+          'track',
+          'InitiateCheckout',
+          {
+            value: product.priceInCents / 100,
+            currency: 'EUR',
+            content_ids: [productId],
+            content_name: product.name,
+            content_type: 'product',
+            num_items: 1,
+          },
+          { eventID: attemptId },
+        )
       }
 
       // Stripe Checkout cannot render inside an iframe (e.g. an embedded preview), so open a new tab there.
