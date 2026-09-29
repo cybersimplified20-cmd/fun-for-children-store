@@ -79,26 +79,13 @@ export function UseCases() {
 
 export function ParentScenarios() {
   return (
-    <section className="px-4 py-14 sm:py-18" aria-labelledby="scenario-title">
-      <div className="mx-auto flex max-w-5xl flex-col gap-7">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">Parent-style examples</p>
-          <h2 id="scenario-title" className="mt-2 font-heading text-3xl font-semibold text-balance">
-            What using the bundle can look like
-          </h2>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {SCENARIOS.map((scenario) => (
-            <article key={scenario.label} className="rounded-2xl border bg-card p-5 shadow-sm">
-              <div className="mb-3 text-amber-500" aria-hidden="true">★★★★★</div>
-              <p className="text-sm leading-relaxed text-foreground">“{scenario.text}”</p>
-              <p className="mt-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                {scenario.label}
-              </p>
-            </article>
-          ))}
-        </div>
+    <section className="px-4 py-10 sm:py-14">
+      <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
+        {SCENARIOS.map((scenario) => (
+          <article key={scenario.label} className="rounded-2xl border bg-card p-5 shadow-sm">
+            <p className="text-sm leading-relaxed text-foreground">{scenario.text}</p>
+          </article>
+        ))}
       </div>
     </section>
   )
