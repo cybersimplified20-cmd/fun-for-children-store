@@ -27,7 +27,12 @@ export function SiteFooter() {
     <footer className="border-t px-4 py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
         <p>{`© ${new Date().getFullYear()} Fun For Children. Printable pages for personal and classroom use.`}</p>
-        <p>Payments are processed securely by Stripe. We never see your card details.</p>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <Link href="/privacy" className="underline-offset-4 hover:underline">Privacy</Link>
+          <Link href="/terms" className="underline-offset-4 hover:underline">Terms</Link>
+          <Link href="/refund-policy" className="underline-offset-4 hover:underline">Refunds</Link>
+          <span>Payments are processed securely by Stripe.</span>
+        </div>
       </div>
     </footer>
   )
