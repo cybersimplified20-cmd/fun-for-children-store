@@ -19,14 +19,10 @@ export const metadata: Metadata = {
       'Fun printable coloring pages for kids. Download instantly, print at home and choose from hundreds of creative activities.',
     type: 'website',
   },
-  generator: 'v0.app',
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/images/fun-for-children-logo.jpg',
+    shortcut: '/images/fun-for-children-logo.jpg',
+    apple: '/images/fun-for-children-logo.jpg',
   },
 }
 
