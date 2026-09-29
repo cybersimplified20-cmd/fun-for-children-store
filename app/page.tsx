@@ -2,28 +2,32 @@ import { Hero } from '@/components/store/hero'
 import { Pricing } from '@/components/store/pricing'
 import { Faq, Themes } from '@/components/store/details'
 import { SiteFooter, SiteHeader } from '@/components/store/site-chrome'
-import { CheckoutCancelledNotice } from '@/components/store/checkout-cancelled-notice'
+import { CheckoutCancelledBanner } from '@/components/store/checkout-cancelled-banner'
 import { ReviewRoad, UseCases } from '@/components/store/review-road'
 import { StickyMobileCta } from '@/components/store/sticky-mobile-cta'
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ checkout?: string }>
-}) {
-  const { checkout } = await searchParams
-
+export default function Page() {
   return (
     <>
       <SiteHeader />
-      {checkout === 'cancelled' ? <CheckoutCancelledNotice /> : null}
+      <CheckoutCancelledBanner />
       <main>
         <Hero />
-        <Pricing />
-        <ReviewRoad />
-        <UseCases />
-        <Themes />
-        <Faq />
+        <div className="[content-visibility:auto] [contain-intrinsic-size:900px]">
+          <Pricing />
+        </div>
+        <div className="[content-visibility:auto] [contain-intrinsic-size:900px]">
+          <ReviewRoad />
+        </div>
+        <div className="[content-visibility:auto] [contain-intrinsic-size:900px]">
+          <UseCases />
+        </div>
+        <div className="[content-visibility:auto] [contain-intrinsic-size:700px]">
+          <Themes />
+        </div>
+        <div className="[content-visibility:auto] [contain-intrinsic-size:700px]">
+          <Faq />
+        </div>
       </main>
       <div className="h-20 md:hidden" aria-hidden="true" />
       <SiteFooter />
