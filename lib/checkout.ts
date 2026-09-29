@@ -59,7 +59,7 @@ export async function createCheckoutSession({
         font_family: 'nunito',
         icon: {
           type: 'url',
-          url: `${siteUrl}/apple-icon.png`,
+          url: `${siteUrl}/images/fun-for-children-profile.jpg`,
         },
       },
       custom_text: {
