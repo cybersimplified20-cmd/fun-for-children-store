@@ -171,6 +171,11 @@ function PlanCard({
             </s>
           ) : null}
         </div>
+        {featured ? (
+          <p className="w-fit rounded-full bg-primary/10 px-3 py-1 text-sm font-bold text-primary">
+            Instant download after payment
+          </p>
+        ) : null}
         {showSavings && getSavingsInCents(product) > 0 ? (
           <p className="w-fit rounded-md bg-accent/15 px-2 py-0.5 text-sm font-bold text-accent">
             Save {formatPrice(getSavingsInCents(product))}
