@@ -15,7 +15,7 @@ export function SiteHeader() {
           href="#pricing"
           className="inline-flex h-10 items-center rounded-lg bg-foreground px-4 text-sm font-bold text-background transition-opacity hover:opacity-90"
         >
-          Get the pages
+          Get 2,500+ Pages
         </a>
       </div>
     </header>
