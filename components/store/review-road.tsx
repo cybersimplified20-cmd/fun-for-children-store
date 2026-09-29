@@ -86,9 +86,6 @@ export function ParentScenarios() {
           <h2 id="scenario-title" className="mt-2 font-heading text-3xl font-semibold text-balance">
             What using the bundle can look like
           </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Illustrative scenarios, not customer testimonials.
-          </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
