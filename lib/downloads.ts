@@ -14,21 +14,21 @@ const PRODUCT_FILES: Record<ProductId, DigitalFile[]> = {
     {
       id: 'starter-pack',
       label: 'Download Your 500+ Coloring Pages',
-      blobPath: 'products/starter/500-plus-printable-coloring-pages.zip',
+      blobPath: '500+ Printable Coloring Pages.zip',
     },
   ],
   plus: [
     {
       id: 'plus-pack',
       label: 'Download Your 1,500+ Coloring Pages',
-      blobPath: 'products/plus/1500-plus-printable-coloring-pages.zip',
+      blobPath: '1,500+ Printable Coloring Pages.zip',
     },
   ],
   mega: [
     {
       id: 'mega-bundle',
       label: 'Download Your Complete 2,500+ Page Collection',
-      blobPath: 'products/mega/ultimate-2500-printable-coloring-pages-mega-bundle.zip',
+      blobPath: '2,500+ Coloring Pages.zip',
     },
   ],
 }
