@@ -10,7 +10,7 @@ export default function Page() {
         <p>Payments are processed by Stripe. We do not receive or store full card details. Stripe may process payment, billing and fraud-prevention information under its own privacy practices.</p>
         <p>We may use website analytics and advertising measurement tools to understand visits, purchases and campaign performance. These tools may use cookies or similar technologies where permitted.</p>
         <p>We do not sell customer personal information. Information may be shared with service providers only when necessary to operate the store, process payments, deliver files or comply with legal obligations.</p>
-        <p>You may contact us to request access, correction or deletion of personal information where applicable. A public support email will be added here once configured.</p>
+        <p>You may contact us through the contact methods made available on the store where applicable.</p>
       </div>
     </main>
   )
