@@ -51,6 +51,22 @@ export async function createCheckoutSession({
       billing_address_collection: 'auto',
       locale: 'auto',
       allow_promotion_codes: true,
+      branding_settings: {
+        display_name: 'Fun For Children',
+        background_color: '#FEFAF1',
+        button_color: '#E8542F',
+        border_style: 'rounded',
+        font_family: 'nunito',
+        icon: {
+          type: 'url',
+          url: `${siteUrl}/apple-icon.png`,
+        },
+      },
+      custom_text: {
+        submit: {
+          message: 'Instant digital download after payment • One-time payment • No subscription',
+        },
+      },
       metadata: { product_id: productId },
       payment_intent_data: { metadata: { product_id: productId } },
       success_url: `${siteUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
