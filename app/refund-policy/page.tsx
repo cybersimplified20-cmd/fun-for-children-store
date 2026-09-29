@@ -9,7 +9,7 @@ export default function Page() {
         <p>Our products are delivered digitally and access is provided immediately after successful payment.</p>
         <p>If you have a technical problem accessing the files, receive the wrong product, or encounter a corrupted download, contact us so we can help resolve the issue.</p>
         <p>Refund requests are reviewed individually where required by applicable consumer law. Nothing in this policy limits rights that cannot legally be excluded.</p>
-        <p>A public support email will be added here once configured.</p>
+        
       </div>
     </main>
   )
