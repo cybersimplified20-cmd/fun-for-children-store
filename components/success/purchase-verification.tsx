@@ -123,11 +123,15 @@ export function PurchaseVerification({ sessionId }: { sessionId: string }) {
         <h2 id="downloads-title" className="font-heading text-xl font-semibold">
           {data.product.downloadHeadline}
         </h2>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Click the button below and your file download will start directly.
+        </p>
         <ul className="flex flex-col gap-3">
           {data.downloads.map((file) => (
             <li key={file.id}>
               <a
                 href={file.url}
+                download
                 className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-center text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <Download className="size-5 shrink-0" aria-hidden="true" />
@@ -137,8 +141,8 @@ export function PurchaseVerification({ sessionId }: { sessionId: string }) {
           ))}
         </ul>
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Download links are private to your order and refresh automatically while this page is open.
-          Bookmark this page to download again later.
+          Download links are private to your paid order and refresh automatically while this page is open.
+          Bookmark this page if you need to download your files again later.
         </p>
       </section>
 
