@@ -10,7 +10,7 @@ export default function Page() {
         <p>Products are for personal and classroom use unless a different licence is stated. Files may not be resold, redistributed, uploaded for public download or represented as your own product.</p>
         <p>Because products are digital, no physical item is shipped. Access is provided after successful payment through the confirmation page.</p>
         <p>You are responsible for having compatible software, a suitable device and printing equipment where needed.</p>
-        <p>These terms may be updated as the store develops. A public support email will be added here once configured.</p>
+        <p>These terms may be updated as the store develops.</p>
       </div>
     </main>
   )
