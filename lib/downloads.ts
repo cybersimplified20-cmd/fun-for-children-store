@@ -5,19 +5,31 @@ import type { ProductId } from '@/lib/products'
 export interface DigitalFile {
   id: string
   label: string
-  /** Google Drive sharing URL. Kept server-side and converted to a direct download only after payment verification. */
-  driveUrl: string | undefined
+  /** Exact pathname inside the connected private Vercel Blob store. */
+  blobPath: string
 }
 
 const PRODUCT_FILES: Record<ProductId, DigitalFile[]> = {
   starter: [
-    { id: 'starter-pack', label: 'Download Your 500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_STARTER },
+    {
+      id: 'starter-pack',
+      label: 'Download Your 500+ Coloring Pages',
+      blobPath: 'products/starter/500-plus-printable-coloring-pages.zip',
+    },
   ],
   plus: [
-    { id: 'plus-pack', label: 'Download Your 1,500+ Coloring Pages', driveUrl: process.env.DRIVE_URL_PLUS },
+    {
+      id: 'plus-pack',
+      label: 'Download Your 1,500+ Coloring Pages',
+      blobPath: 'products/plus/1500-plus-printable-coloring-pages.zip',
+    },
   ],
   mega: [
-    { id: 'mega-bundle', label: 'Download Your Complete 2,500+ Page Collection', driveUrl: process.env.DRIVE_URL_MEGA },
+    {
+      id: 'mega-bundle',
+      label: 'Download Your Complete 2,500+ Page Collection',
+      blobPath: 'products/mega/ultimate-2500-printable-coloring-pages-mega-bundle.zip',
+    },
   ],
 }
 
@@ -28,14 +40,14 @@ const DOWNLOAD_LINK_TTL_SECONDS = 15 * 60
 function getSigningKey() {
   const base = process.env.DOWNLOAD_TOKEN_SECRET ?? process.env.STRIPE_SECRET_KEY
   if (!base) throw new Error('No signing secret available for delivery links')
-  return createHmac('sha256', base).update('delivery-link-v2').digest()
+  return createHmac('sha256', base).update('delivery-link-v3').digest()
 }
 
 function sign(payload: string) {
   return createHmac('sha256', getSigningKey()).update(payload).digest('base64url')
 }
 
-/** Creates a short-lived URL tied to one paid Checkout Session and one purchased product. */
+/** Creates a short-lived site URL tied to one paid Checkout Session and one purchased product. */
 export function createSecureDownload(sessionId: string, fileId: string) {
   const expiresAt = Math.floor(Date.now() / 1000) + DOWNLOAD_LINK_TTL_SECONDS
   const payload = Buffer.from(JSON.stringify({ s: sessionId, f: fileId, e: expiresAt })).toString('base64url')
