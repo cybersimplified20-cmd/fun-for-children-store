@@ -20,9 +20,9 @@ export default async function Page({
       <main>
         <Hero />
         <Pricing />
+        <ReviewRoad />
         <UseCases />
         <Themes />
-        <ReviewRoad />
         <Faq />
       </main>
       <div className="h-20 md:hidden" aria-hidden="true" />
