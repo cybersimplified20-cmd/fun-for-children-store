@@ -38,6 +38,7 @@ export async function GET(request: NextRequest) {
     const { presignedUrl } = await presignUrl(delegationToken, {
       pathname: file.blobPath,
       operation: 'get',
+      access: 'private',
       validUntil: signedUrlValidUntil,
     })
 
