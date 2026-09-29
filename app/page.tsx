@@ -3,7 +3,7 @@ import { Pricing } from '@/components/store/pricing'
 import { Faq, Themes } from '@/components/store/details'
 import { SiteFooter, SiteHeader } from '@/components/store/site-chrome'
 import { CheckoutCancelledNotice } from '@/components/store/checkout-cancelled-notice'
-import { UseCases } from '@/components/store/review-road'
+import { ParentScenarios, UseCases } from '@/components/store/review-road'
 import { StickyMobileCta } from '@/components/store/sticky-mobile-cta'
 
 export default async function Page({
@@ -22,6 +22,7 @@ export default async function Page({
         <Pricing />
         <UseCases />
         <Themes />
+        <ParentScenarios />
         <Faq />
       </main>
       <div className="h-20 md:hidden" aria-hidden="true" />
